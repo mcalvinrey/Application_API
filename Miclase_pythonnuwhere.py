@@ -13,10 +13,6 @@ root_db = "/home/MiguelC/Application_API/databases/"
 model = pickle.load(open(root + 'advertising.model', 'rb'))
 print(model.coef_)
 
-@app.route('/', methods=['GET'])
-def home():
-	return "<h1>Miguel dale candela</h1><p>Esta es la api para predecir una predicción predictiva</p>"
-
 # POST {"TV":, "radio":, "newspaper":} -> It returns the sales prediction for input investments
 @app.route('/predict', methods=['POST', 'GET'])
 def get_predict():
@@ -29,8 +25,8 @@ def get_predict():
     cursor = connection.cursor()
 
     # Get POST JSON data
-    data = request.get_json()
-    if type(data) != dict:
+    data = request.get_json(silent=True)
+    if data == None:
         data = request.args
     tv = data.get("TV",0)
     radio = data.get("radio",0)
@@ -54,3 +50,7 @@ def return_predicts():
       resultado = jsonify(crs.execute(query).fetchall())
       conn.close()
       return resultado
+
+@app.route('/', methods=['GET'])
+def home():
+	return "<h1>Miguel dale candela</h1><p>Esta es la api para predecir una predicción predictiva.</p>"
