@@ -40,7 +40,7 @@ def get_predict():
     connection.commit()
     connection.close()
     # Return the prediction
-    return str(pred), 200
+    return "con valores %s %s %s: %s" %(str(tv), str(radio), str(newspaper), str(pred)), 200
 
 @app.route('/review_predicts', methods=['GET'])
 def return_predicts():
