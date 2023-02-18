@@ -8,8 +8,8 @@ import numpy as np
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-root = "/home/MiguelC/modelo_clase/" # Ruta a la carpeta donde esté el modelo guardado
-root_db = "/home/MiguelC/databases/"
+root = "/home/MiguelC/Application_API/modelo_clase/" # Ruta a la carpeta donde esté el modelo guardado
+root_db = "/home/MiguelC/Application_API/databases/"
 model = pickle.load(open(root + 'advertising.model', 'rb'))
 print(model.coef_)
 
